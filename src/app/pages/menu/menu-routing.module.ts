@@ -5,8 +5,23 @@ import { MenuPage } from './menu.page';
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo: '/menu/main',
+    pathMatch: 'full'
+  },
+  {
     path: '',
-    component: MenuPage
+    component: MenuPage,
+    children: [
+      {
+        path: 'main',
+        loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
+      },
+      {
+        path: 'childone',
+        loadChildren: () => import('./pages/childone/childone.module').then( m => m.ChildonePageModule)
+      },
+    ]
   }
 ];
 
